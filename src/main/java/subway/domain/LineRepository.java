@@ -3,7 +3,7 @@ package subway.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+import subway.enums.Exceptions;
 
 public class LineRepository {
 
@@ -19,11 +19,12 @@ public class LineRepository {
 
     public static Line findLine(String name) {
         return lines().stream().filter(line -> line.getName().equals(name))
-            .findFirst().get();
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException(Exceptions.NONE_UPLOAD_LINE.getMessage()));
     }
 
-    public static boolean deleteLineByName(String name) {
-        return lines.removeIf(line -> Objects.equals(line.getName(), name));
+    public static void deleteLine(String name) {
+        lines().remove(findLine(name));
     }
 
     public static boolean isDuplicated(String name) {

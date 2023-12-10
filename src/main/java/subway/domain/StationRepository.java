@@ -17,9 +17,9 @@ public class StationRepository {
     }
 
     public static Station findStation(String name) {
-        return stations().stream().filter(line -> line.getName().equals(name))
+        return stations().stream().filter(station -> station.getName().equals(name))
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException(Exceptions.NONE_UPLOAD.getMessage()));
+            .orElseThrow(() -> new IllegalArgumentException(Exceptions.NONE_UPLOAD_STATION.getMessage()));
     }
 
     public static boolean isDuplicated(String name) {

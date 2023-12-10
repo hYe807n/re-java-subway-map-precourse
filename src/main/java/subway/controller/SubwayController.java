@@ -47,7 +47,7 @@ public class SubwayController {
             OutputView.printInfo(uploadLine());
         }
         if (option.equals(LineOptions.REMOVE.getOption())) {
-
+            OutputView.printInfo(removeLine());
         }
         if (option.equals(LineOptions.SHOW.getOption())) {
 
@@ -66,6 +66,17 @@ public class SubwayController {
             OutputView.printException(exception.getMessage());
             return uploadStation();
         }
+    }
+
+    private String removeLine() {
+        try {
+            LineRepository.deleteLine(InputVIew.readStationRemove());
+            return Form.REMOVE_LINE.getMessage();
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception.getMessage());
+            removeStation();
+        }
+        return removeStation();
     }
 
     private void stationScreen() {
@@ -112,7 +123,7 @@ public class SubwayController {
     }
 
     private String chooseStationOption() {
-        String option = null;
+        String option;
         try {
             option = InputVIew.readStationOption();
             Exception.validateStationOption(option);
@@ -125,7 +136,7 @@ public class SubwayController {
     }
 
     private String mainScreen() {
-        String option = null;
+        String option;
         try {
             option = InputVIew.readMainOption();
             Exception.validateMainOption(option);

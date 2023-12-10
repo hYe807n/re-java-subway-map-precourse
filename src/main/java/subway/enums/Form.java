@@ -22,6 +22,7 @@ public enum Form {
     UPLOAD_STATION("지하철 역이 등록되었습니다."),
     UPLOAD_LINE("지하철 노선이 등록되었습니다."),
     REMOVE_STATION("지하철 역이 삭제되었습니다."),
+    REMOVE_LINE("지하철 노선이 삭제되었습니다."),
     SUCCESS("\n[INFO] "),
     ERROR("\n[ERROR] ");
 
