@@ -1,6 +1,7 @@
 package subway.view;
 
 import java.util.StringJoiner;
+import subway.enums.Exceptions;
 import subway.enums.Form;
 
 public class OutputView {
@@ -25,7 +26,11 @@ public class OutputView {
         System.out.println(Form.STATION_UPLOAD.getMessage());
     }
 
-    public static void printSuccess(String result) {
+    public static void printRemoveStation() {
+        System.out.println(Form.STATION_REMOVE.getMessage());
+    }
+
+    public static void printInfo(String result) {
         System.out.println(new StringJoiner("", Form.SUCCESS.getMessage(),
             result));
     }

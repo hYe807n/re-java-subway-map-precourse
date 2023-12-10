@@ -7,8 +7,7 @@ import java.util.stream.Collectors;
 import subway.Validator.Exception;
 import subway.domain.Line;
 import subway.domain.LineRepository;
-import subway.domain.Section;
-import subway.domain.SectionRepository;
+import subway.domain.Sections;
 import subway.domain.Station;
 import subway.domain.StationRepository;
 import subway.enums.Form;
@@ -37,20 +36,44 @@ public class SubwayController {
 
     private void stationScreen() {
         String option = chooseStationOption();
+        if (option.equals(StationOptions.EXIT.getOption())) {
+            return;
+        }
         if (option.equals(StationOptions.UPLOAD.getOption())) {
-            uploadStation();
+            OutputView.printInfo(uploadStation());
+        }
+        if (option.equals(StationOptions.REMOVE.getOption())) {
+            OutputView.printInfo(removeStation());
+        }
+        if (option.equals(StationOptions.SHOW.getOption())) {
+            showStations();
         }
     }
 
-    private void uploadStation() {
+    private void showStations() {
+        StationRepository.stations()
+            .forEach(station -> OutputView.printInfo(station.getName()));
+    }
+
+    private String removeStation() {
         try {
-            StationRepository.addStation(new Station(InputVIew.readStationUpload()));
-            OutputView.printSuccess(Form.UPLOAD_STATION.getMessage());
+            StationRepository.deleteStation(InputVIew.readStationRemove());
+            return Form.REMOVE_STATION.getMessage();
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception.getMessage());
-            uploadStation();
+            removeStation();
         }
+        return removeStation();
+    }
 
+    private String uploadStation() {
+        try {
+            StationRepository.addStation(new Station(InputVIew.readStationUpload()));
+            return Form.UPLOAD_STATION.getMessage();
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception.getMessage());
+            return uploadStation();
+        }
     }
 
     private String chooseStationOption() {
@@ -91,7 +114,7 @@ public class SubwayController {
         List<Station> station = stations.stream().map(
             StationRepository::findStation
         ).collect(Collectors.toList());
-        SectionRepository.addSection(new Section(LineRepository.findLine(line), station));
+        Sections.addSection(LineRepository.findLine(line), station);
     }
 
     private void initializeLines() {
