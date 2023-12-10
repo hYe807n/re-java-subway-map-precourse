@@ -20,4 +20,12 @@ public class Sections {
             .anyMatch(line -> sections().get(line).stream()
                 .anyMatch(station -> station.getName().equals(name)));
     }
+
+    public static List<Station> findStationsByLine(Line line) {
+        return sections().get(line);
+    }
+
+    public static void addByIndex(Line line, Station station, int index) {
+        sections.get(line).add(index - 1, station);
+    }
 }

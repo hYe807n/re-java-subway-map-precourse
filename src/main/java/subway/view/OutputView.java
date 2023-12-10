@@ -19,6 +19,12 @@ public class OutputView {
 
     public static void printStationScreen() {
         System.out.println(Form.STATION_SCREEN.getMessage());
+        printSelect();
+    }
+
+    public static void printLineScreen() {
+        System.out.println(Form.LINE_SCREEN.getMessage());
+        printSelect();
     }
 
     public static void printUploadStation() {
@@ -30,10 +36,10 @@ public class OutputView {
     }
 
     public static void printShowInfo(String info) {
-        System.out.println(info);
+        System.out.print(info);
     }
-    public static void printInfo(String station) {
-        System.out.print(new StringJoiner("", Form.SUCCESS.getMessage(), station));
+    public static void printInfo(String info) {
+        System.out.print(new StringJoiner("", Form.SUCCESS.getMessage(), info));
     }
 
     public static void printInfoResult(String result) {
@@ -51,5 +57,22 @@ public class OutputView {
 
     public static void printLineEnd() {
         System.out.println(Form.LINE_END.getMessage());
+    }
+
+    public static void printEmpty() {
+        System.out.println("");
+    }
+
+    public static void printSectionScreen() {
+        System.out.println(Form.SECTION_SCREEN.getMessage());
+    }
+    public static void printSectionLine() {
+        System.out.println(Form.SECTION_LINE.getMessage());
+    }
+    public static void printSectionStation() {
+        System.out.println(Form.SECTION_STATION.getMessage());
+    }
+    public static void printSectionIndex() {
+        System.out.println(Form.SECTION_INDEX.getMessage());
     }
 }

@@ -13,6 +13,7 @@ import subway.domain.StationRepository;
 import subway.enums.Form;
 import subway.enums.LineOptions;
 import subway.enums.MainOptions;
+import subway.enums.SectionOptions;
 import subway.enums.StationOptions;
 import subway.view.InputVIew;
 import subway.view.OutputView;
@@ -36,10 +37,61 @@ public class SubwayController {
         if (option.equals(MainOptions.LINE.getOption())) {
             lineScreen();
         }
+        if (option.equals(MainOptions.SECTION.getOption())) {
+            sectionScreen();
+        }
+        if (option.equals(MainOptions.SUBWAY_LINES.getOption())) {
+            showAllLines();
+        }
+    }
+
+    private void sectionScreen() {
+        String option = chooseSectionOption();
+        if (option.equals(SectionOptions.EXIT.getOption())) {
+            return;
+        }
+        if (option.equals(SectionOptions.UPLOAD.getOption())) {
+            OutputView.printInfoResult(uploadSection());
+        }
+        if (option.equals(SectionOptions.REMOVE.getOption())) {
+        }
+    }
+
+    private String uploadSection() {
+        Line line = LineRepository.findLine(InputVIew.readSectionLine());
+        Station station = StationRepository.findStation(InputVIew.readSectionStation());
+        int index = Integer.parseInt(InputVIew.readSectionIndex());
+        Sections.addByIndex(line, station, index);
+        return Form.UPLOAD_SECTION.getMessage();
+    }
+
+    private String chooseSectionOption() {
+        String option;
+        try {
+            option = InputVIew.readSectionOption();
+            Exception.validateSectionOption(option);
+            return option;
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception.getMessage());
+            option = chooseSectionOption();
+        }
+        return option;
+    }
+
+    private void showAllLines() {
+        OutputView.printShowInfo(Form.ALL_LINES.getMessage());
+        Sections.sections().keySet()
+            .forEach(line -> {
+                OutputView.printInfo(line.getName());
+                OutputView.printInfo(Form.DIVISION.getMessage());
+                Sections.findStationsByLine(line).forEach(station ->
+                    OutputView.printInfo(station.getName()));
+                OutputView.printEmpty();
+            });
     }
 
     private void lineScreen() {
-        String option = chooseStationOption();
+        String option = chooseLineOption();
         if (option.equals(LineOptions.EXIT.getOption())) {
             return;
         }
@@ -52,6 +104,19 @@ public class SubwayController {
         if (option.equals(LineOptions.SHOW.getOption())) {
             showLines();
         }
+    }
+
+    private String chooseLineOption() {
+        String option;
+        try {
+            option = InputVIew.readLineOptions();
+            Exception.validateOption(option);
+            return option;
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception.getMessage());
+            option = chooseLineOption();
+        }
+        return option;
     }
 
     private String uploadLine() {
@@ -83,6 +148,7 @@ public class SubwayController {
         OutputView.printShowInfo(Form.LINES.getMessage());
         StationRepository.stations()
             .forEach(station -> OutputView.printInfo(station.getName()));
+        OutputView.printEmpty();
     }
 
     private void stationScreen() {
@@ -105,6 +171,7 @@ public class SubwayController {
         OutputView.printShowInfo(Form.STATIONS.getMessage());
         StationRepository.stations()
             .forEach(station -> OutputView.printInfo(station.getName()));
+        OutputView.printEmpty();
     }
 
     private String removeStation() {
@@ -132,7 +199,7 @@ public class SubwayController {
         String option;
         try {
             option = InputVIew.readStationOption();
-            Exception.validateStationOption(option);
+            Exception.validateOption(option);
             return option;
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception.getMessage());
@@ -159,7 +226,7 @@ public class SubwayController {
         initializeStations();
         initializeSections("2호선", Arrays.asList("교대역", "강남역", "역삼역"));
         initializeSections("3호선", Arrays.asList("교대역", "남부터미널역", "양재역", "매봉역"));
-        initializeSections("신분당선", Arrays.asList("강남역", "양재시민의숲역", "양재역"));
+        initializeSections("신분당선", Arrays.asList("강남역", "양재역", "양재시민의숲역"));
     }
 
     private void initializeSections(String line, List<String> stations) {
@@ -178,8 +245,8 @@ public class SubwayController {
     private void initializeStations() {
         List<Station> stationsInitial = new ArrayList<>(Arrays
             .asList(new Station("교대역"), new Station("강남역"), new Station("역삼역")
-                , new Station("남부터미널역"), new Station("양재역"), new Station("매봉역")
-                , new Station("양재시민의숲역")));
+                , new Station("남부터미널역"), new Station("양재역")
+                , new Station("양재시민의숲역"), new Station("매봉역")));
         stationsInitial.forEach(StationRepository::addStation);
     }
 }

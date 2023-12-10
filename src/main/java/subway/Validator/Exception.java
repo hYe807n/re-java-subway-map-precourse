@@ -3,6 +3,7 @@ package subway.Validator;
 import java.util.Arrays;
 import subway.enums.Exceptions;
 import subway.enums.MainOptions;
+import subway.enums.SectionOptions;
 import subway.enums.StationOptions;
 
 public class Exception {
@@ -23,9 +24,18 @@ public class Exception {
         return option == null;
     }
 
-    public static void validateStationOption(String option) {
+    public static void validateOption(String option) {
         if (Arrays.stream(StationOptions.values()).anyMatch(
             number -> number.getOption().equals(option))
+            || validateInputNull(option)) {
+            return;
+        }
+        throw new IllegalArgumentException(Exceptions.WRONG_OPTION.getMessage());
+    }
+
+    public static void validateSectionOption(String option) {
+        if (Arrays.stream(SectionOptions.values()).anyMatch(
+            number ->  number.getOption().equals(option))
             || validateInputNull(option)) {
             return;
         }

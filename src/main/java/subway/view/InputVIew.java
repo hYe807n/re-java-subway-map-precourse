@@ -14,7 +14,11 @@ public class InputVIew {
 
     public static String readStationOption() {
         OutputView.printStationScreen();
-        OutputView.printSelect();
+        return read.nextLine().trim();
+    }
+
+    public static String readLineOptions() {
+        OutputView.printLineScreen();
         return read.nextLine().trim();
     }
 
@@ -40,6 +44,27 @@ public class InputVIew {
 
     public static String readLineEnd() {
         OutputView.printLineEnd();
+        return read.nextLine().trim();
+    }
+
+    public static String readSectionOption() {
+        OutputView.printSectionScreen();
+        OutputView.printSelect();
+        return read.nextLine().trim();
+    }
+
+    public static String readSectionLine() {
+        OutputView.printSectionLine();
+        return read.nextLine().trim();
+    }
+
+    public static String readSectionStation() {
+        OutputView.printSectionStation();
+        return read.nextLine().trim();
+    }
+
+    public static String readSectionIndex() {
+        OutputView.printSectionIndex();
         return read.nextLine().trim();
     }
 }
