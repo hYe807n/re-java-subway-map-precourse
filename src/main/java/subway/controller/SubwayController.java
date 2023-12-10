@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import subway.Validator.Exception;
 import subway.domain.Line;
 import subway.domain.LineRepository;
 import subway.domain.Section;
@@ -11,17 +12,27 @@ import subway.domain.SectionRepository;
 import subway.domain.Station;
 import subway.domain.StationRepository;
 import subway.view.InputVIew;
+import subway.view.OutputView;
 
 public class SubwayController {
 
 
     public void run() {
         initializeInforms();
-        mainScreen();
+        String option = mainScreen();
     }
 
-    private void mainScreen() {
-        InputVIew.readMainOption();
+    private String mainScreen() {
+        String option = null;
+        try {
+            option = InputVIew.readMainOption();
+            Exception.validateMainOption(option);
+            return option;
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception.getMessage());
+            mainScreen();
+        }
+        return option;
     }
 
     private void initializeInforms() {
