@@ -24,7 +24,7 @@ public class LineRepository {
     }
 
     public static void deleteLine(String name) {
-        lines().remove(findLine(name));
+        lines.remove(findLine(name));
     }
 
     public static boolean isDuplicated(String name) {

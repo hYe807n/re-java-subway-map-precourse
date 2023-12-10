@@ -27,6 +27,7 @@ public enum Form {
     ALL_LINES("\n## 지하철 노선도"),
     DIVISION("---"),
     STATION_REMOVE("\n## 삭제할 역 이름을 입력하세요."),
+    LINE_REMOVE("\n## 삭제할 노선 이름을 입력하세요."),
     STATION_UPLOAD("\n## 등록할 역 이름을 입력하세요."),
     LINE_UPLOAD("\n## 등록할 노선 이름을 입력하세요."),
     LINE_START("\n## 등록할 노선의 상행 종점역 이름을 입력하세요."),

@@ -77,4 +77,9 @@ public class InputVIew {
         OutputView.printSectionRemoveStation();
         return read.nextLine().trim();
     }
+
+    public static String readLineRemove() {
+        OutputView.printLineRemove();
+        return read.nextLine().trim();
+    }
 }

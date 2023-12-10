@@ -137,13 +137,13 @@ public class SubwayController {
             return Form.UPLOAD_LINE.getMessage();
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception.getMessage());
-            return uploadStation();
+            return uploadLine();
         }
     }
 
     private String removeLine() {
         try {
-            LineRepository.deleteLine(InputVIew.readStationRemove());
+            LineRepository.deleteLine(InputVIew.readLineRemove());
             return Form.REMOVE_LINE.getMessage();
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception.getMessage());
@@ -154,7 +154,7 @@ public class SubwayController {
 
     private void showLines() {
         OutputView.printShowInfo(Form.LINES.getMessage());
-        StationRepository.stations()
+        LineRepository.lines()
             .forEach(station -> OutputView.printInfo(station.getName()));
         OutputView.printEmpty();
     }

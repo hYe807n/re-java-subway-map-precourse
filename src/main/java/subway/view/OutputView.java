@@ -82,4 +82,8 @@ public class OutputView {
     public static void printSectionRemoveStation() {
         System.out.println(Form.SECTION_REMOVE_STATION.getMessage());
     }
+
+    public static void printLineRemove() {
+        System.out.println(Form.LINE_REMOVE.getMessage());
+    }
 }
