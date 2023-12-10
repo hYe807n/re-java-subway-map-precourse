@@ -19,7 +19,10 @@ public class Station {
 
     private void validate(String name) {
         if (name.length() < MINIMUM_LENGTH) {
-            throw new IllegalArgumentException(Exceptions.WRONG_NAME.getMessage());
+            throw new IllegalArgumentException(Exceptions.WRONG_NAME_LENGTH.getMessage());
+        }
+        if (StationRepository.isDuplicated(name)) {
+            throw new IllegalArgumentException(Exceptions.WRONG_NAME_DUPLICATED.getMessage());
         }
     }
 }
