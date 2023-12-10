@@ -2,9 +2,8 @@ package subway.domain;
 
 public class Line {
     private String name;
-
     public Line(String name) {
-        this.name = name;
+        this.name = name.trim();
     }
 
     public String getName() {
