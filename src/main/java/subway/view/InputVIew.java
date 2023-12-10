@@ -67,4 +67,14 @@ public class InputVIew {
         OutputView.printSectionIndex();
         return read.nextLine().trim();
     }
+
+    public static String readSectionRemoveLine() {
+        OutputView.printSectionRemoveLine();
+        return read.nextLine().trim();
+    }
+
+    public static String readSectionRemoveStation() {
+        OutputView.printSectionRemoveStation();
+        return read.nextLine().trim();
+    }
 }

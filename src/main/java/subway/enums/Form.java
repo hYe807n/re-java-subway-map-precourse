@@ -34,6 +34,8 @@ public enum Form {
     SECTION_LINE("\n## 노선을 입력하세요."),
     SECTION_STATION("\n## 역이름을 입력하세요."),
     SECTION_INDEX("\n## 순서를 입력하세요."),
+    SECTION_REMOVE_LINE("\n## 삭제할 구간의 노선을 입력하세요."),
+    SECTION_REMOVE_STATION("\n## 삭제할 구간의 역을 입력하세요."),
     UPLOAD_STATION("지하철 역이 등록되었습니다."),
     UPLOAD_LINE("지하철 노선이 등록되었습니다."),
     REMOVE_STATION("지하철 역이 삭제되었습니다."),

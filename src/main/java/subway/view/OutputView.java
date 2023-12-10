@@ -75,4 +75,11 @@ public class OutputView {
     public static void printSectionIndex() {
         System.out.println(Form.SECTION_INDEX.getMessage());
     }
+    public static void printSectionRemoveLine() {
+        System.out.println(Form.SECTION_REMOVE_LINE.getMessage());
+    }
+
+    public static void printSectionRemoveStation() {
+        System.out.println(Form.SECTION_REMOVE_STATION.getMessage());
+    }
 }

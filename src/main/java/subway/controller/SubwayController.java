@@ -54,7 +54,14 @@ public class SubwayController {
             OutputView.printInfoResult(uploadSection());
         }
         if (option.equals(SectionOptions.REMOVE.getOption())) {
+            OutputView.printInfoResult(removeSection());
         }
+    }
+
+    private String removeSection() {
+        Line line = LineRepository.findLine(InputVIew.readSectionRemoveLine());
+        Station station = StationRepository.findStation(InputVIew.readSectionRemoveStation());
+        return Form.REMOVE_SECTION.getMessage();
     }
 
     private String uploadSection() {
