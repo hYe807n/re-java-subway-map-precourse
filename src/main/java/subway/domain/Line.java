@@ -1,8 +1,12 @@
 package subway.domain;
 
+import subway.Validator.Exception;
+import subway.enums.Exceptions;
+
 public class Line {
-    private String name;
+    private final String name;
     public Line(String name) {
+        validate(name);
         this.name = name.trim();
     }
 
@@ -10,5 +14,10 @@ public class Line {
         return name;
     }
 
-    // 추가 기능 구현
+    private void validate(String name) {
+        Exception.validateNameLength(name);
+        if (LineRepository.isDuplicated(name)) {
+            throw new IllegalArgumentException(Exceptions.WRONG_NAME_DUPLICATED.getMessage());
+        }
+    }
 }

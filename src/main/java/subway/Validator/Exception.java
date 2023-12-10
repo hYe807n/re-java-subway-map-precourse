@@ -7,6 +7,9 @@ import subway.enums.StationOptions;
 
 public class Exception {
 
+    private static final int MINIMUM_LENGTH = 2;
+
+
     public static void validateMainOption(String option) {
         if (Arrays.stream(MainOptions.values()).anyMatch(
             number -> number.getOption().equals(option))
@@ -27,5 +30,11 @@ public class Exception {
             return;
         }
         throw new IllegalArgumentException(Exceptions.WRONG_OPTION.getMessage());
+    }
+
+    public static void validateNameLength(String name) {
+        if (name.length() < MINIMUM_LENGTH) {
+            throw new IllegalArgumentException(Exceptions.WRONG_NAME_LENGTH.getMessage());
+        }
     }
 }

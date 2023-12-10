@@ -1,10 +1,9 @@
 package subway.domain;
 
+import subway.Validator.Exception;
 import subway.enums.Exceptions;
 
 public class Station {
-
-    private static final int MINIMUM_LENGTH = 2;
 
     private final String name;
 
@@ -18,9 +17,7 @@ public class Station {
     }
 
     private void validate(String name) {
-        if (name.length() < MINIMUM_LENGTH) {
-            throw new IllegalArgumentException(Exceptions.WRONG_NAME_LENGTH.getMessage());
-        }
+        Exception.validateNameLength(name);
         if (StationRepository.isDuplicated(name)) {
             throw new IllegalArgumentException(Exceptions.WRONG_NAME_DUPLICATED.getMessage());
         }
