@@ -51,6 +51,7 @@ public class SubwayController {
     }
 
     private void showStations() {
+        OutputView.printStations();
         StationRepository.stations()
             .forEach(station -> OutputView.printInfo(station.getName()));
     }

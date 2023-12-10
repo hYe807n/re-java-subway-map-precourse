@@ -30,6 +30,10 @@ public class OutputView {
         System.out.println(Form.STATION_REMOVE.getMessage());
     }
 
+    public static void printStations() {
+        System.out.println(Form.STATIONS.getMessage());
+    }
+
     public static void printInfo(String result) {
         System.out.println(new StringJoiner("", Form.SUCCESS.getMessage(),
             result));

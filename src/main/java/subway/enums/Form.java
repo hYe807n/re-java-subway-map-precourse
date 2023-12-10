@@ -13,6 +13,7 @@ public enum Form {
         + "3. 역 조회\n"
         + "B. 돌아가기"),
     SELECT("\n## 원하는 기능을 선택하세요."),
+    STATIONS("\n## 역 목록"),
     STATION_REMOVE("\n## ## 삭제할 역 이름을 입력하세요."),
     STATION_UPLOAD("\n## 등록할 역 이름을 입력하세요."),
     UPLOAD_STATION("지하철 역이 등록되었습니다."),
