@@ -34,6 +34,6 @@ public class Sections {
         if (sections.get(line).size() <= 2 ) {
             throw new IllegalArgumentException(Exceptions.MINIMUM_SECTION_SIZE.getMessage());
         }
-
+        sections.get(line).remove(station);
     }
 }
