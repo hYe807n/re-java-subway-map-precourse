@@ -10,11 +10,18 @@ import subway.domain.Section;
 import subway.domain.SectionRepository;
 import subway.domain.Station;
 import subway.domain.StationRepository;
+import subway.view.InputVIew;
 
 public class SubwayController {
 
+
     public void run() {
         initializeInforms();
+        mainScreen();
+    }
+
+    private void mainScreen() {
+        InputVIew.readMainOption();
     }
 
     private void initializeInforms() {
