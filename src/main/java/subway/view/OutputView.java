@@ -24,4 +24,9 @@ public class OutputView {
     public static void printUploadStation() {
         System.out.println(Form.STATION_UPLOAD.getMessage());
     }
+
+    public static void printSuccess(String result) {
+        System.out.println(new StringJoiner("", Form.SUCCESS.getMessage(),
+            result));
+    }
 }

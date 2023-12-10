@@ -19,7 +19,7 @@ public class InputVIew {
     }
 
     public static String readStationUpload() {
-        OutputView.printStationScreen();
+        OutputView.printUploadStation();
         return read.nextLine().trim();
     }
 }

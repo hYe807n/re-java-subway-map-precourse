@@ -14,6 +14,8 @@ public enum Form {
         + "B. 돌아가기"),
     SELECT("\n## 원하는 기능을 선택하세요."),
     STATION_UPLOAD("\n## 등록할 역 이름을 입력하세요."),
+    UPLOAD_STATION("지하철 역이 등록되었습니다."),
+    SUCCESS("\n[INFO] "),
     ERROR("\n[ERROR] ");
 
     private final String message;
