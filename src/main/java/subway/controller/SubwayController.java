@@ -11,6 +11,7 @@ import subway.domain.Sections;
 import subway.domain.Station;
 import subway.domain.StationRepository;
 import subway.enums.Form;
+import subway.enums.LineOptions;
 import subway.enums.MainOptions;
 import subway.enums.StationOptions;
 import subway.view.InputVIew;
@@ -31,6 +32,39 @@ public class SubwayController {
     private void manageState(String option) {
         if (option.equals(MainOptions.STATION.getOption())) {
             stationScreen();
+        }
+        if (option.equals(MainOptions.LINE.getOption())) {
+            lineScreen();
+        }
+    }
+
+    private void lineScreen() {
+        String option = chooseStationOption();
+        if (option.equals(LineOptions.EXIT.getOption())) {
+            return;
+        }
+        if (option.equals(LineOptions.UPLOAD.getOption())) {
+            OutputView.printInfo(uploadLine());
+        }
+        if (option.equals(LineOptions.REMOVE.getOption())) {
+
+        }
+        if (option.equals(LineOptions.SHOW.getOption())) {
+
+        }
+    }
+
+    private String uploadLine() {
+        try {
+            Line line = new Line(InputVIew.readLineUpload());
+            LineRepository.addLine(line);
+            Sections.addSection(line,
+                Arrays.asList(StationRepository.findStation(InputVIew.readLineStart()),
+                StationRepository.findStation(InputVIew.readLineStart())));
+            return Form.UPLOAD_LINE.getMessage();
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception.getMessage());
+            return uploadStation();
         }
     }
 
@@ -53,7 +87,7 @@ public class SubwayController {
     private void showStations() {
         OutputView.printStations();
         StationRepository.stations()
-            .forEach(station -> OutputView.printInfo(station.getName()));
+            .forEach(station -> OutputView.printStation(station.getName()));
     }
 
     private String removeStation() {
@@ -108,7 +142,7 @@ public class SubwayController {
         initializeStations();
         initializeSections("2호선", Arrays.asList("교대역", "강남역", "역삼역"));
         initializeSections("3호선", Arrays.asList("교대역", "남부터미널역", "양재역", "매봉역"));
-        initializeSections("신분당선", Arrays.asList("강남역", "양재역", "양재시민의숲역"));
+        initializeSections("신분당선", Arrays.asList("강남역", "양재시민의숲역", "양재역"));
     }
 
     private void initializeSections(String line, List<String> stations) {

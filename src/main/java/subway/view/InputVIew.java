@@ -27,4 +27,19 @@ public class InputVIew {
         OutputView.printRemoveStation();
         return read.nextLine().trim();
     }
+
+    public static String readLineUpload() {
+        OutputView.printUploadLine();
+        return read.nextLine().trim();
+    }
+
+    public static String readLineStart() {
+        OutputView.printLineStart();
+        return read.nextLine().trim();
+    }
+
+    public static String readLineEnd() {
+        OutputView.printLineEnd();
+        return read.nextLine().trim();
+    }
 }

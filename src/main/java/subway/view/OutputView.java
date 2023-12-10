@@ -1,7 +1,6 @@
 package subway.view;
 
 import java.util.StringJoiner;
-import subway.enums.Exceptions;
 import subway.enums.Form;
 
 public class OutputView {
@@ -33,9 +32,24 @@ public class OutputView {
     public static void printStations() {
         System.out.println(Form.STATIONS.getMessage());
     }
+    public static void printStation(String station) {
+        System.out.print(new StringJoiner("", Form.SUCCESS.getMessage(), station));
+    }
 
     public static void printInfo(String result) {
         System.out.println(new StringJoiner("", Form.SUCCESS.getMessage(),
             result));
+    }
+
+    public static void printUploadLine() {
+        System.out.println(Form.LINE_UPLOAD.getMessage());
+    }
+
+    public static void printLineStart() {
+        System.out.println(Form.LINE_START.getMessage());
+    }
+
+    public static void printLineEnd() {
+        System.out.println(Form.LINE_END.getMessage());
     }
 }
