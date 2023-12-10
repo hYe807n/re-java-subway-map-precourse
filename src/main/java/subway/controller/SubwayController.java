@@ -44,13 +44,13 @@ public class SubwayController {
             return;
         }
         if (option.equals(LineOptions.UPLOAD.getOption())) {
-            OutputView.printInfo(uploadLine());
+            OutputView.printInfoResult(uploadLine());
         }
         if (option.equals(LineOptions.REMOVE.getOption())) {
-            OutputView.printInfo(removeLine());
+            OutputView.printInfoResult(removeLine());
         }
         if (option.equals(LineOptions.SHOW.getOption())) {
-
+            showLines();
         }
     }
 
@@ -60,7 +60,7 @@ public class SubwayController {
             LineRepository.addLine(line);
             Sections.addSection(line,
                 Arrays.asList(StationRepository.findStation(InputVIew.readLineStart()),
-                StationRepository.findStation(InputVIew.readLineStart())));
+                StationRepository.findStation(InputVIew.readLineEnd())));
             return Form.UPLOAD_LINE.getMessage();
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception.getMessage());
@@ -79,16 +79,22 @@ public class SubwayController {
         return removeStation();
     }
 
+    private void showLines() {
+        OutputView.printShowInfo(Form.LINES.getMessage());
+        StationRepository.stations()
+            .forEach(station -> OutputView.printInfo(station.getName()));
+    }
+
     private void stationScreen() {
         String option = chooseStationOption();
         if (option.equals(StationOptions.EXIT.getOption())) {
             return;
         }
         if (option.equals(StationOptions.UPLOAD.getOption())) {
-            OutputView.printInfo(uploadStation());
+            OutputView.printInfoResult(uploadStation());
         }
         if (option.equals(StationOptions.REMOVE.getOption())) {
-            OutputView.printInfo(removeStation());
+            OutputView.printInfoResult(removeStation());
         }
         if (option.equals(StationOptions.SHOW.getOption())) {
             showStations();
@@ -96,9 +102,9 @@ public class SubwayController {
     }
 
     private void showStations() {
-        OutputView.printStations();
+        OutputView.printShowInfo(Form.STATIONS.getMessage());
         StationRepository.stations()
-            .forEach(station -> OutputView.printStation(station.getName()));
+            .forEach(station -> OutputView.printInfo(station.getName()));
     }
 
     private String removeStation() {

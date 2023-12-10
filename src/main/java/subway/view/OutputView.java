@@ -29,14 +29,14 @@ public class OutputView {
         System.out.println(Form.STATION_REMOVE.getMessage());
     }
 
-    public static void printStations() {
-        System.out.println(Form.STATIONS.getMessage());
+    public static void printShowInfo(String info) {
+        System.out.println(info);
     }
-    public static void printStation(String station) {
+    public static void printInfo(String station) {
         System.out.print(new StringJoiner("", Form.SUCCESS.getMessage(), station));
     }
 
-    public static void printInfo(String result) {
+    public static void printInfoResult(String result) {
         System.out.println(new StringJoiner("", Form.SUCCESS.getMessage(),
             result));
     }

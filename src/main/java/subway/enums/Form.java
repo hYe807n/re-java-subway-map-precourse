@@ -14,6 +14,7 @@ public enum Form {
         + "B. 돌아가기"),
     SELECT("\n## 원하는 기능을 선택하세요."),
     STATIONS("\n## 역 목록"),
+    LINES("\n## 노선 목록"),
     STATION_REMOVE("\n## 삭제할 역 이름을 입력하세요."),
     STATION_UPLOAD("\n## 등록할 역 이름을 입력하세요."),
     LINE_UPLOAD("\n## 등록할 노선 이름을 입력하세요."),
