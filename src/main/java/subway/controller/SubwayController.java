@@ -61,6 +61,7 @@ public class SubwayController {
     private String removeSection() {
         Line line = LineRepository.findLine(InputVIew.readSectionRemoveLine());
         Station station = StationRepository.findStation(InputVIew.readSectionRemoveStation());
+        Sections.deleteSection(line, station);
         return Form.REMOVE_SECTION.getMessage();
     }
 
