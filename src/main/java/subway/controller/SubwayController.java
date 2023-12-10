@@ -11,6 +11,8 @@ import subway.domain.Section;
 import subway.domain.SectionRepository;
 import subway.domain.Station;
 import subway.domain.StationRepository;
+import subway.enums.MainOptions;
+import subway.enums.StationOptions;
 import subway.view.InputVIew;
 import subway.view.OutputView;
 
@@ -19,7 +21,46 @@ public class SubwayController {
 
     public void run() {
         initializeInforms();
-        String option = mainScreen();
+        String option;
+        do {
+            option = mainScreen();
+        } while (!option.equals(MainOptions.EXIT.getOption()));
+    }
+
+    private void manageState(String option) {
+        if (option.equals(MainOptions.STATION.getOption())) {
+            stationScreen();
+        }
+    }
+
+    private void stationScreen() {
+        String option = chooseStationOption();
+        if (option.equals(StationOptions.UPLOAD.getOption())) {
+            uploadStation();
+        }
+    }
+
+    private void uploadStation() {
+        try {
+            StationRepository.addStation(new Station(InputVIew.readStationUpload()));
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception.getMessage());
+            uploadStation();
+        }
+
+    }
+
+    private String chooseStationOption() {
+        String option = null;
+        try {
+            option = InputVIew.readStationOption();
+            Exception.validateStationOption(option);
+            return option;
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception.getMessage());
+            option = mainScreen();
+        }
+        return option;
     }
 
     private String mainScreen() {

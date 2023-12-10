@@ -1,7 +1,9 @@
 package subway.Validator;
 
 import java.util.Arrays;
+import subway.enums.Exceptions;
 import subway.enums.MainOptions;
+import subway.enums.StationOptions;
 
 public class Exception {
 
@@ -11,10 +13,19 @@ public class Exception {
         || validateInputNull(option)) {
             return;
         }
-        throw new IllegalArgumentException("선택할 수 없는 기능입니다.");
+        throw new IllegalArgumentException(Exceptions.WRONG_OPTION.getMessage());
     }
 
     public static boolean validateInputNull(String option) {
         return option == null;
+    }
+
+    public static void validateStationOption(String option) {
+        if (Arrays.stream(StationOptions.values()).anyMatch(
+            number -> number.getOption().equals(option))
+            || validateInputNull(option)) {
+            return;
+        }
+        throw new IllegalArgumentException(Exceptions.WRONG_OPTION.getMessage());
     }
 }

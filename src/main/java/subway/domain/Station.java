@@ -1,9 +1,15 @@
 package subway.domain;
 
+import subway.enums.Exceptions;
+
 public class Station {
-    private String name;
+
+    private static final int MINIMUM_LENGTH = 2;
+
+    private final String name;
 
     public Station(String name) {
+        validate(name);
         this.name = name.trim();
     }
 
@@ -11,5 +17,9 @@ public class Station {
         return name;
     }
 
-    // 추가 기능 구현
+    private void validate(String name) {
+        if (name.length() < MINIMUM_LENGTH) {
+            throw new IllegalArgumentException(Exceptions.WRONG_NAME.getMessage());
+        }
+    }
 }
